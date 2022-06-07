@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>My first three.js app</title>
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="js/three.js"></script>
+    <script>
+      const scene = new THREE.Scene(); //무대
+      const camera = new THREE.PerspectiveCamera( //카메라
+        70, //fov = 시아각 (광각 더 많이 더 멀리 볼수있는각)
+        window.innerWidth / window.innerHeight, //종횡비 가로와 세로의 비율
+        0.1, // 어떤 거리에서부터 보여줄건지.
+        1000 //카메라 거리 어디까지 보여줄건지 멀리까지 보여줄수 있다.
+      );
+
+      const renderer = new THREE.WebGLRenderer(); //화면을 찍어내는 역할
+
+      renderer.setSize(window.innerWidth, window.innerHeight); //이 크기만큼 찍어낸다.
+      document.body.appendChild(renderer.domElement);
+
+      const geometry = new THREE.BoxGeometry(); //박스 생성
+      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); //재질
+      const cube = new THREE.Mesh(geometry, material); //박스와 재질을 가지고 큐브를 만든것이다.
+      scene.add(cube); // 큐브를 scene에다 갔다 붙인것이다
+
+      camera.position.z = 5; //fov는 70에다 고정을 해놓고 카메라는 position으로 움직인다.
+
+      function animate() {
+        requestAnimationFrame(animate); //1초에 60프레임에 애니메이션이 돌아간다.
+
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+
+        renderer.render(scene, camera); //계속 렌더해준다.
+      }
+
+      animate();
+    </script>
+  </body>
+</html>
