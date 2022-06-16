@@ -61,18 +61,18 @@ const init = () => {
 };
 
 const onDocumentMouseMove = (event) => {
-    mouseX = event.clientX - windowHalfX;
-    mouseY = event.clientY - windowHalfY;
+    mouseX = event.clientX - windowHalfX;// 가운데 값이 0이 되도록 변경해줌
+    mouseY = event.clientY - windowHalfY;// 가운데 값이 0이 되도록 변경해줌
     // console.log(mouseY);
     // console.log(event.clientX, windowHalfX, mouseX);
 };
 
 const animete = () => {
-    targetX = mouseX * 0.003;
+    targetX = mouseX * 0.003;//값이 높아지면 빨라짐
     targetY = mouseY * 0.002;
 
     if (boxMesh) {
-        boxMesh.rotation.y += 0.1 * (targetX - boxMesh.rotation.y);
+        boxMesh.rotation.y += 0.1 * (targetX - boxMesh.rotation.y);//0.1은 속도 나머지 공식은 그냥 왜우기
         boxMesh.rotation.x += 0.1 * (targetY - boxMesh.rotation.x);
     }
 
